@@ -16,10 +16,10 @@ public class Player {
     public Player(int tileSize, Color coinColor, String playerName){
           coinPosition =1;
           name=playerName;
-          coin = new Circle(tileSize/2);
+          coin = new Circle(tileSize/2-5);
           coin.setFill(coinColor);
-          coin.setTranslateX(20);
-          coin.setTranslateY(380);
+          coin.setTranslateX(30);
+          coin.setTranslateY(570);
     }
 
     public void movePlayer(int diceValue){
@@ -28,7 +28,20 @@ public class Player {
 //            coin.setTranslateX(gameBoard.getXCoordinate(coinPosition));
 //            coin.setTranslateY(gameBoard.getYCoordinate(coinPosition));
             translatePlayer();
+
+            int newPosition = gameBoard.getNextPosition(coinPosition);
+            if(newPosition != coinPosition){
+                coinPosition = newPosition;
+                translatePlayer();
+            }
         }
+    }
+
+    public String playerWon(){
+        if(coinPosition==100) {
+            return name + " Won the Game";
+        }
+        return null;
     }
 
     private void translatePlayer(){

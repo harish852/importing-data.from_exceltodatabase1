@@ -16,17 +16,21 @@ import java.io.IOException;
 
 public class snakeLadder extends Application {
 
-    public static final int tileSize=40,height=10,width=10;
+    public static final int tileSize=60,height=10,width=10;
     int lowerLine  = tileSize*height;
     int diceValue;
 
     Label rolledDiceValueLabel;
 
+    boolean firstPlayerTurn=true , secondPlayerTurn  = false, gameStarted = false;
+
+    Button startGameButton;
+
     Player firstPlayer = new Player(tileSize, Color.BLACK,"Hari");
-    Player secondPlayer = new Player(tileSize-10,Color.WHITE,"vedanth");
+    Player secondPlayer = new Player(tileSize-5,Color.WHITE,"Vicky");
     Pane createContent(){
         Pane root = new Pane();
-        root.setPrefSize(width*tileSize,height*tileSize+50);
+        root.setPrefSize(width*tileSize,height*tileSize+80);
 
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
@@ -45,34 +49,78 @@ public class snakeLadder extends Application {
         boardImage.setFitHeight(tileSize*height);
 
         Button playerOneButton  = new Button("Player One");
-        playerOneButton.setTranslateX(20);
+        playerOneButton.setTranslateX(30);
         playerOneButton.setTranslateY(lowerLine+20);
+
+
         Button playerTwoButton  = new Button("Player Two");
-        playerTwoButton.setTranslateX(250);
+        playerTwoButton.setTranslateX(500);
         playerTwoButton.setTranslateY(lowerLine+20);
+
 
         playerOneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                setDiceValue();
-                firstPlayer.movePlayer(diceValue);
+                if(gameStarted){
+                    if(firstPlayerTurn){
+                        setDiceValue();
+                        firstPlayer.movePlayer(diceValue);
+                        if(firstPlayer.playerWon()!=null){
+                            rolledDiceValueLabel.setText(firstPlayer.playerWon());
+                            firstPlayerTurn=true;
+                            secondPlayerTurn=false;
+                            gameStarted = false;
+                            startGameButton.setDisable(false);
+                            startGameButton.setText("Start Game");
+                        }
+                        firstPlayerTurn=false;
+                        secondPlayerTurn=true;
+                    }
+                }
+
             }
         });
 
         playerTwoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                setDiceValue();
-                secondPlayer.movePlayer(diceValue);
+                if (gameStarted) {
+                    if (secondPlayerTurn) {
+                        setDiceValue();
+                        secondPlayer.movePlayer(diceValue);
+                        if (secondPlayer.playerWon() != null) {
+                            rolledDiceValueLabel.setText(secondPlayer.playerWon());
+                            firstPlayerTurn=true;
+                            secondPlayerTurn=false;
+                            gameStarted = false;
+                            startGameButton.setDisable(false);
+                            startGameButton.setText("Start Game");
+                        }
+                        secondPlayerTurn=false;
+                        firstPlayerTurn=true;
+                    }
+                }
+            }
+        });
+
+        startGameButton = new Button("Start");
+        startGameButton.setTranslateY(lowerLine+50);
+        startGameButton.setTranslateX(275);
+        startGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                gameStarted=true;
+                startGameButton.setText("Ongoing Game");
+                startGameButton.setDisable(true);
             }
         });
 
         rolledDiceValueLabel = new Label("Start the Game");
-        rolledDiceValueLabel.setTranslateY(lowerLine+20);
-        rolledDiceValueLabel.setTranslateX(135);
+        rolledDiceValueLabel.setTranslateY(lowerLine+25);
+        rolledDiceValueLabel.setTranslateX(260);
 
         root.getChildren().addAll(boardImage,playerOneButton,playerTwoButton,firstPlayer.getCoin(),secondPlayer.getCoin(),
-                rolledDiceValueLabel);
+                rolledDiceValueLabel,startGameButton);
 //                secondPlayer.getCoin());
 
         return root;

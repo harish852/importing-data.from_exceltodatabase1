@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 public class Board {
     private ArrayList<Pair<Integer,Integer>> positionCoordinates;
+    private ArrayList<Integer> snakeLadderPosition;
 
     public Board(){
        populatePositionCoordinates();
+        populateSnakeLadderPosition();
     }
 
 
@@ -33,6 +35,30 @@ public class Board {
         }
     }
 
+    private void populateSnakeLadderPosition(){
+        snakeLadderPosition = new ArrayList<>();
+        for(int i=0;i<101;i++){
+            snakeLadderPosition.add(i);
+        }
+        snakeLadderPosition.set(1,38);
+        snakeLadderPosition.set(4,14);
+        snakeLadderPosition.set(9,31);
+        snakeLadderPosition.set(21,42);
+        snakeLadderPosition.set(28,84);
+        snakeLadderPosition.set(51,67);
+        snakeLadderPosition.set(71,91);
+        snakeLadderPosition.set(80,100);
+        snakeLadderPosition.set(17,7);
+        snakeLadderPosition.set(54,34);
+        snakeLadderPosition.set(62,19);
+        snakeLadderPosition.set(64,60);
+        snakeLadderPosition.set(87,24);
+        snakeLadderPosition.set(93,73);
+        snakeLadderPosition.set(95,75);
+        snakeLadderPosition.set(98,79);
+
+    }
+
     public int getXCoordinate(int position){
         return positionCoordinates.get(position).getKey();
     }
@@ -41,6 +67,13 @@ public class Board {
         return positionCoordinates.get(position).getValue();
     }
 
+
+    public int getNextPosition(int position){
+        if(position>=1&&position<=100)
+        return snakeLadderPosition.get(position);
+        else
+            return -1;
+    }
 
 //    public static void main(String[] args) {
 //        Board board= new Board();
