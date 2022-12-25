@@ -1,8 +1,11 @@
 package com.example.snakeladderjan;
 
+import javafx.animation.TranslateTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+
 public class Player {
     private Circle coin;
     private String name;
@@ -17,6 +20,25 @@ public class Player {
           coin.setFill(coinColor);
           coin.setTranslateX(20);
           coin.setTranslateY(380);
+    }
+
+    public void movePlayer(int diceValue){
+        if(coinPosition+diceValue<=100){
+            coinPosition+=diceValue;
+//            coin.setTranslateX(gameBoard.getXCoordinate(coinPosition));
+//            coin.setTranslateY(gameBoard.getYCoordinate(coinPosition));
+            translatePlayer();
+        }
+    }
+
+    private void translatePlayer(){
+
+        TranslateTransition move = new TranslateTransition(Duration.millis(1000),this.coin );
+        move.setToX(gameBoard.getXCoordinate(coinPosition));
+        move.setToY(gameBoard.getYCoordinate(coinPosition));
+        move.setAutoReverse(false);
+        move.play();
+
     }
 
     public Circle getCoin() {
