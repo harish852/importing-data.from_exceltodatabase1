@@ -13,12 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-public class HelloApplication extends Application {
+public class Simple_Dictionary extends Application {
 
     Label meaningLabel;
+
+    Label headerLabel;
     Button searchButton;
     TextField wordTextField;
 
@@ -30,57 +34,66 @@ public class HelloApplication extends Application {
         Pane root=new Pane();
         root.setPrefSize(400,600);
 
+        headerLabel=new Label("Enter Your Word");
+        headerLabel.setTextFill(Color.BLACK);
+        headerLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,15));
+        headerLabel.setTranslateX(35);;
+        headerLabel.setTranslateY(20);
+
        wordTextField = new TextField();
-        wordTextField.setTranslateX(20);
-        wordTextField.setTranslateY(30);
+        wordTextField.setTranslateX(30);
+        wordTextField.setTranslateY(60);
 
          searchButton = new Button("Search");
-        searchButton.setTranslateX(200);
-        searchButton.setTranslateY(30);
+        searchButton.setTranslateX(210);
+        searchButton.setTranslateY(60);
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 meaningLabel.setText("Button is clicked");
                 wordTextField.getText();
                 String word = wordTextField.getText();
+                word=word.toLowerCase();
                 if(word.isBlank() || word.isEmpty()){
                     meaningLabel.setText("please enter a word !");
                     meaningLabel.setTextFill(Color.RED);
                 }
                 else{
                     String meaning  = dictionaryUsingHashMap.getMeaning(word);
-                    meaningLabel.setText(meaning);
-                    meaningLabel.setTextFill(Color.BLACK);
+                    meaningLabel.setText(word.toUpperCase()+"  :  "+meaning);
+                    meaningLabel.setTextFill(Color.STEELBLUE);
                 }
             }
         });
 
 
-        meaningLabel = new Label("i am meaning");
-        meaningLabel.setTranslateX(20);
-        meaningLabel.setTranslateY(60);
+        meaningLabel = new Label("Meaning : ");
+        meaningLabel.setTranslateX(26);
+        meaningLabel.setTranslateY(150);
+        meaningLabel.setFont(Font.font("Verdana" , FontWeight.BOLD,14));
+        meaningLabel.setTextFill(Color.STEELBLUE);
+//
+//        suggestionList = new ListView<>();
+//        suggestionList.setTranslateX(20);
+//        suggestionList.setTranslateY(100);
+//        suggestionList.setMinSize(350,40);
+//        suggestionList.setMaxSize(300,50);
+//
+//
+//        String[] wordList = {"Hari","Pavan","Vicky"};
+//        suggestionList.getItems().addAll(wordList);
+//        suggestionList.setOrientation(Orientation.HORIZONTAL);
+//
+//        suggestionList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                String selectedWord = suggestionList.getSelectionModel().getSelectedItem();
+//                meaningLabel.setText(selectedWord);
+//            }
+//        });
 
-        suggestionList = new ListView<>();
-        suggestionList.setTranslateX(20);
-        suggestionList.setTranslateY(100);
-        suggestionList.setMinSize(350,40);
-        suggestionList.setMaxSize(300,50);
 
-
-        String[] wordList = {"Hari","Pavan","Vicky"};
-        suggestionList.getItems().addAll(wordList);
-        suggestionList.setOrientation(Orientation.HORIZONTAL);
-
-        suggestionList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String selectedWord = suggestionList.getSelectionModel().getSelectedItem();
-                meaningLabel.setText(selectedWord);
-            }
-        });
-
-
-        root.getChildren().addAll((Node) wordTextField,searchButton,meaningLabel,suggestionList);
+        root.getChildren().addAll((Node) wordTextField,searchButton,meaningLabel,headerLabel);
 
         return root;
     }

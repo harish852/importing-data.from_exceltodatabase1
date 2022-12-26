@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.dictionaryhari11december/com.example.dictionaryhari11december.HelloApplication
+                                com.example.dictionaryhari11december/com.example.dictionaryhari11december.Simple_Dictionary
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

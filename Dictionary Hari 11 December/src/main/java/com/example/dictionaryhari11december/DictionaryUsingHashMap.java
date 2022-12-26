@@ -32,10 +32,21 @@ public class DictionaryUsingHashMap {
 
     private void addWordList(){
         addWord("shubh", "Auspicious");
-        addWord("Phase", "a stage in the development of something");
+        addWord("phase", "a stage in the development of something");
         addWord("project", "an individual or collaborative enterprise that is carefully planned to achieve a particular aim");
         addWord("start", "beginning");
-        addWord("Depreciating assets ", "Whose value decreases with time");
+        addWord("depreciating assets ", "Whose value decreases with time");
+        addWord("absence", "lack");
+        addWord("academic", "scholastic");
+        addWord("boundary", "bounds");
+        addWord("borrow", "take");
+        addWord("characteristics", "typical");
+        addWord("embrace", "accept");
+        addWord("foreign", "overseas");
+        addWord("incorporate", "include");
+        addWord("justify", "defend");
+        addWord("generate", "produce");
+        addWord("dialogue", "conversation");
 
     }
 }
