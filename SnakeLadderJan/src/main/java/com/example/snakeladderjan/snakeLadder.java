@@ -10,6 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,11 +54,16 @@ public class snakeLadder extends Application {
         Button playerOneButton  = new Button("Player One");
         playerOneButton.setTranslateX(30);
         playerOneButton.setTranslateY(lowerLine+20);
+        playerOneButton.setFont(Font.font("Verdana" , FontWeight.BOLD,20));
+        playerOneButton.setTextFill(Color.STEELBLUE);
+
 
 
         Button playerTwoButton  = new Button("Player Two");
-        playerTwoButton.setTranslateX(500);
+        playerTwoButton.setTranslateX(420);
         playerTwoButton.setTranslateY(lowerLine+20);
+        playerTwoButton.setFont(Font.font("Verdana" , FontWeight.BOLD,20));
+        playerTwoButton.setTextFill(Color.STEELBLUE);
 
 
         playerOneButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -71,7 +79,8 @@ public class snakeLadder extends Application {
                             secondPlayerTurn=false;
                             gameStarted = false;
                             startGameButton.setDisable(false);
-                            startGameButton.setText("Start Game");
+                            startGameButton.setText("Restart");
+
                         }
                         firstPlayerTurn=false;
                         secondPlayerTurn=true;
@@ -84,6 +93,7 @@ public class snakeLadder extends Application {
         playerTwoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 if (gameStarted) {
                     if (secondPlayerTurn) {
                         setDiceValue();
@@ -94,7 +104,7 @@ public class snakeLadder extends Application {
                             secondPlayerTurn=false;
                             gameStarted = false;
                             startGameButton.setDisable(false);
-                            startGameButton.setText("Start Game");
+                            startGameButton.setText("Restart");
                         }
                         secondPlayerTurn=false;
                         firstPlayerTurn=true;
@@ -104,20 +114,26 @@ public class snakeLadder extends Application {
         });
 
         startGameButton = new Button("Start");
-        startGameButton.setTranslateY(lowerLine+50);
-        startGameButton.setTranslateX(275);
+        startGameButton.setTranslateY(lowerLine+45);
+        startGameButton.setTranslateX(270);
+        startGameButton.setFont(Font.font("verdana" , FontWeight.BOLD, FontPosture.REGULAR,15));
+        startGameButton.setTextFill(Color.DARKGREEN);
         startGameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 gameStarted=true;
-                startGameButton.setText("Ongoing Game");
+                startGameButton.setText("Ongoing");
                 startGameButton.setDisable(true);
+
             }
         });
 
-        rolledDiceValueLabel = new Label("Start the Game");
-        rolledDiceValueLabel.setTranslateY(lowerLine+25);
+        rolledDiceValueLabel = new Label("Let's begin");
+        rolledDiceValueLabel.setTranslateY(lowerLine+20);
         rolledDiceValueLabel.setTranslateX(260);
+        rolledDiceValueLabel.setFont(Font.font("verdana" , FontWeight.BOLD, FontPosture.REGULAR,15));
+        rolledDiceValueLabel.setTextFill(Color.RED);
+
 
         root.getChildren().addAll(boardImage,playerOneButton,playerTwoButton,firstPlayer.getCoin(),secondPlayer.getCoin(),
                 rolledDiceValueLabel,startGameButton);

@@ -39,14 +39,14 @@ public class Player {
 
     public String playerWon(){
         if(coinPosition==100) {
-            return name + " Won the Game";
+            return name + " Won !!!";
         }
         return null;
     }
 
     private void translatePlayer(){
 
-        TranslateTransition move = new TranslateTransition(Duration.millis(1000),this.coin );
+        TranslateTransition move = new TranslateTransition(Duration.millis(1400),this.coin );
         move.setToX(gameBoard.getXCoordinate(coinPosition));
         move.setToY(gameBoard.getYCoordinate(coinPosition));
         move.setAutoReverse(false);
